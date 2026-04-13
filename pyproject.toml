@@ -27,6 +27,8 @@ dependencies = [
     "sqlmodel",
     "tabulate",
     "typer",
+    "starlette",
+    "pillow",
     "uvicorn[standard]",
 ]
 [project.optional-dependencies]

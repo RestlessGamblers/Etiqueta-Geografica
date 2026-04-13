@@ -1,4 +1,5 @@
 from app.models.user import UserBase
+from app.models.user import SignBase
 from sqlmodel import SQLModel
 from pydantic import EmailStr
 from typing import Optional
@@ -23,3 +24,7 @@ class SignupRequest(SQLModel):
     username: str
     email: EmailStr
     password: str
+
+class SignPublic(SignBase):
+    id: int
+    user: UserResponse
