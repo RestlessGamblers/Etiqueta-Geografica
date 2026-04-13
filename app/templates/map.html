@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Map View | PinJournal</title>
+    
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #8B1E1E 0%, #6e1510 100%);
+            font-family: 'Open Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px 32px;
+        }
+
+       
+        .navbar {
+            background: #FFF8DC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 80px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #250404, #b04535);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFF8DC;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: #b04535;
+            color: white;
+        }
+
+        .login-btn {
+            background: #2d241f;
+            color: #FFF8DC;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #160f0c;
+            transform: scale(0.97);
+        }
+
+      
+        .map-container {
+            background: white;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,245,215,0.6);
+            height: calc(100vh - 140px);
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .map-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .map-placeholder h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #5a3a2a;
+            margin-bottom: 12px;
+        }
+
+        .map-placeholder p {
+            color: #8a7a6a;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .map-placeholder small {
+            color: #b8a090;
+            font-size: 13px;
+        }
+
+        .map-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 248, 220, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 10px 18px;
+            border-radius: 60px;
+            font-size: 12px;
+            color: #5a3a2a;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        
+        .toast-container {
+            z-index: 9999;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .navbar { flex-wrap: wrap; gap: 12px; border-radius: 48px; }
+            .map-container { height: calc(100vh - 120px); min-height: 400px; }
+            .logo-text { display: none; }
+            .map-placeholder h3 { font-size: 20px; }
+            .map-icon { font-size: 60px; }
+            .nav-links { gap: 8px; }
+            .nav-links a { padding: 6px 14px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appToast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong id="toastTitle">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastContent"></div>
+        </div>
+    </div>
+
+    
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="logo">EG</div>
+            <div class="logo-text">geotagger</div>
+        </div>
+        <div class="nav-links">
+            <a href="map.html" id="navMapBtn" class="active">Map</a>
+            <a href="base.html" id="navPicturesBtn">Pictures</a>
+            <a href="pic-upload.html" id="navSubmitBtn">Submit pictures</a>
+        </div>
+        <button class="login-btn" id="authBtn">Sign In</button>
+    </div>
+
+
+    <div class="map-container">
+        <div class="map-placeholder">
+            <div class="map-icon">MAP</div>
+            <h3>Interactive Map</h3>
+            <p>Map functionality will be added here!</p>
+            <small>Click on map to place pins for your pictures allegedly</small>
+        </div>
+        <div class="map-hint">
+            Map placeholder 
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        
+        function showToast(message, title = 'Notice') {
+            const toastEl = document.getElementById('appToast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastContent = document.getElementById('toastContent');
+            
+            toastTitle.textContent = title;
+            toastContent.textContent = message;
+            
+            const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+            toast.show();
+        }
+        
+     
+        function setupNavigation() {
+            const mapBtn = document.getElementById('navMapBtn');
+            const picturesBtn = document.getElementById('navPicturesBtn');
+            const submitBtn = document.getElementById('navSubmitBtn');
+            const authBtn = document.getElementById('authBtn');
+            
+            if (mapBtn) {
+                mapBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showToast('You are already on the Map page', 'Info');
+                });
+            }
+            
+            
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+        });
+    </script>
+</body>
+</html>
