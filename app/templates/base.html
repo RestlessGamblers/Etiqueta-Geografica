@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Something something layout {% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='img/favicon.ico')}}">
 
     <!-- Usual bootstrap css, bootstrap js, jquery and material symbols -->
@@ -13,8 +13,294 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,100,1,200"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background: linear-gradient(145deg, #8B1E1E 0%, #6e1510 100%);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+    padding: 24px 32px;
+}
+
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+h1 { font-size: 32px; letter-spacing: -0.3px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
+
+/* smaller text*/
+.small-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #4a3e38;
+    line-height: 1.5;
+}
+
+/* navigation*/
+.navbar {
+    background: #FFF8DC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 28px;
+    border-radius: 80px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,240,0.6);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #250404, #b04535);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #FFF8DC;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-links button {
+    background: transparent;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 60px;
+    color: #2e2a24;
+}
+
+.nav-links button:hover {
+    background: #fce9c4;
+    transform: translateY(-2px);
+}
+
+.login-btn {
+    background: #2d241f;
+    color: #FFF8DC;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 60px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.login-btn:hover {
+    background: #160f0c;
+    transform: scale(0.97);
+}
+
+/* main*/
+.container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* where the treasure at? (map) */
+.map {
+    background: #ffffffea;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.2);
+    min-height: 520px;
+    backdrop-filter: blur(1px);
+    transition: transform 0.2s;
+    border: 1px solid rgba(255,245,215,0.6);
+}
+
+.map:hover {
+    transform: translateY(-4px);
+}
+
+.map h2 {
+    color: #7f3f33;
+    background: #fef3e0;
+    padding: 12px 28px;
+    border-radius: 60px;
+    font-weight: 500;
+}
+
+/* the right wing */
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* carousel stuff*/
+.carousel {
+    background: #ffffff;
+    border-radius: 36px;
+    padding: 24px 20px 20px 20px;
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s;
+}
+
+.carousel:hover {
+    transform: translateY(-3px);
+}
+
+.carousel h3 {
+    padding-left: 6px;
+}
+
+.carousel-container {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 28px;
+    margin: 12px 0 12px 0;
+    background: #faf2e6;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.carousel img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border-radius: 28px;
+}
+
+.carousel img.active {
+    opacity: 1;
+}
+
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(45, 36, 31, 0.7);
+    backdrop-filter: blur(8px);
+    color: #fffaec;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 12;
+    font-family: monospace;
+}
+
+.arrow:hover {
+    background: #8B1E1E;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.prev { left: 16px; }
+.next { right: 16px; }
+
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #d9cdb0;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #b04535;
+    width: 28px;
+    border-radius: 20px;
+}
+
+
+.description {
+    background: #ffffff;
+    border-radius: 32px;
+    padding: 24px 28px;
+    box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.12);
+    transition: all 0.25s;
+    border: none;
+}
+
+.description:hover {
+    transform: translateY(-3px);
+}
+
+.description h3 {
+    color: #5a2c22;
+    margin-bottom: 10px;
+}
+
+.description p {
+    margin-top: 8px;
+}
+
+.location-line {
+    margin-top: 12px;
+    font-weight: 300;
+    font-size: 13px;
+    color: #7a5a4a;
+}
+
+@media (max-width: 880px) {
+    body { padding: 16px; }
+    .container { grid-template-columns: 1fr; gap: 24px; }
+    .navbar { flex-wrap: wrap; gap: 14px; border-radius: 48px; }
+    .carousel-container { height: 240px; }
+}
+</style>
+</head>
+
+
+
     <!-- Custom css and js global for the app-->
     <link href="{{ url_for('static', path='css/app.css')}}" rel="stylesheet">
 
@@ -28,17 +314,117 @@
 <body>
     {% block content %}{% endblock %}
 
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="appToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2000">
+   <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appToast" class="toast">
             <div class="toast-header">
-                <strong class="me-auto" id="toastTitle"></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                <strong id="toastTitle"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
             </div>
-            <div class="toast-body" id="toastContent">
-                
-            </div>
+            <div class="toast-body" id="toastContent"></div>
         </div>
     </div>
+
+    
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="logo">EG</div>
+
+            <div class="nav-links">
+
+                <a href="map.html">
+                <button>Map</button> </a>
+                
+                    <a href="gallery.html">
+                <button>Pictures</button>
+                </a>
+
+                <a href="pic-upload.html">
+                    <button>Submit Pictures</button>
+                </a>
+            </div>
+        </div>
+        <a href="login.html">
+        <button class="login-btn">Log In</button> </a>
+    </div>
+
+   
+    <div class="container">
+
+       
+        <div class="map">
+            <h2>Interactive Map</h2>
+        </div>
+
+        
+        <div class="right">
+
+        
+            <div class="carousel">
+                <h3>Pictures Carousel</h3>
+
+                <div class="carousel-container">
+                    <img src="https://picsum.photos/id/1015/700/420" class="active" alt="">
+                    <img src="https://i.pinimg.com/1200x/14/31/71/1431717c4347724460a7e8fc9674440d.jpg" alt="">
+                    <img src="https://www.ghibli.jp/gallery/totoro025.jpg" alt="">
+                    <img src="https://64.media.tumblr.com/3a8c56d900d560816aa1cffc58d528b0/dc247a8828ce3176-5f/s400x600/33f2b27131b75de26221a377c375f7a5a1cbcb5d.png" alt="">
+
+                    <button class="arrow prev">‹</button>
+                    <button class="arrow next">›</button>
+                </div>
+
+                <div class="indicators">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+            
+            <div class="description">
+                <h3>Mountain</h3>
+                <p class="small-text">
+                    Literally a mountain, trust me bro.
+                </p>
+                <p class="location-line">
+                    Coordinates: 10.0000, -61.0000
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script> 
+        const images = document.querySelectorAll('.carousel img');
+        let currentIndex = 0;
+
+        function showImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+        setInterval(showImage, 4000);
+
+         function prevSlide() {
+        if (pictures.length === 0) return;
+        let newIdx = currentCarouselIndex - 1;
+        if (newIdx < 0) newIdx = pictures.length - 1;
+        setActiveSlide(newIdx);
+    }
+
+    function nextSlide() {
+        if (pictures.length === 0) return;
+        let newIdx = currentCarouselIndex + 1;
+        if (newIdx >= pictures.length) newIdx = 0;
+        setActiveSlide(newIdx);
+    }
+
+    //line up the pic and description
+    //fix little dot animation 
+    //fix carousel buttons
+    // sync up pages
+    </script>
 
     {% block external_js %}{% endblock %}
 </body>
