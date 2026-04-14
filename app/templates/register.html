@@ -1,8 +1,3 @@
-
-{% block external_js %}
-{% endblock %}
-
-{% block internal_css %}
 <style>
     * {
         margin: 0;
@@ -39,7 +34,7 @@
             width: 44px;
             height: 44px;
             border-radius: 30px;
-            background: linear-gradient(135deg, #250404, #b04535);
+            background: linear-gradient(135deg, #99120b, #520c01);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -158,10 +153,13 @@
         margin-bottom: 24px;
     }
 
-    .image-icon {
-        font-size: 80px;
-        margin-bottom: 20px;
-    }
+   .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
+        }
 
     .feature-list {
         text-align: left;
@@ -314,16 +312,14 @@
         .register-image h2 { font-size: 24px; }
     }
 </style>
-{% endblock %}
-
-{% block content %}
 
 <div class="navbar">
-    <div class="nav-left">
-        <div class="logo-placeholder"></div>
-        <div class="logo">EG</div>
-        <div class="logo-text">geotagger</div>
-    </div>
+   <div class="nav-left">
+            <div class="logo">
+                 <img src="/app/static/img/logo (yellow).png" alt="Logo">
+            </div>
+            <div class="logo-text">The Geo-Tagger</div>
+        </div>
 
         <div class="nav-links">
             <a href="map.html">Map</a>
@@ -366,17 +362,14 @@
                         </button>
 
                         <div id="flashMessages"></div>
-
-                        {% for message in get_flashed_messages(request) %}
-                        <div class="alert alert-{{ message.type }}" role="alert">{{ message.message }}</div>
-                        {% endfor %}
+                      
                     </form>
 
                     <hr>
 
                     <div class="text-center">
                         <small class="text-muted">
-                            By registering, you agree to your email being used for authentication and images you upload to be shared.
+                            By registering, you agree to your email being used for authentication purposes and images you upload to be shared.
                         </small>
                     </div>
                 </div>
@@ -463,4 +456,3 @@
     }
 </script>
 
-{% endblock %}

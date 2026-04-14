@@ -67,11 +67,11 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
             gap: 28px;
         }
 
-        .logo {
-            width: 44px;
-            height: 44px;
+         .logo {
+            width: 60px;
+            height: 60px;
             border-radius: 30px;
-            background: linear-gradient(135deg, #250404, #b04535);
+            background: linear-gradient(135deg, #99120b, #520c01);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,7 +79,12 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
             font-size: 14px;
             color: #FFF8DC;
             font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .logo:hover {
+         transform: translateY(-2px);
+                    }
 
         .logo-text {
             font-size: 20px;
@@ -87,6 +92,14 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
             font-family: 'Montserrat', sans-serif;
             color: #2d2a24;
             letter-spacing: -0.5px;
+        }
+
+        .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
         }
 
         .nav-links {
@@ -341,8 +354,10 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
     
     <div class="navbar">
         <div class="nav-left">
-            <div class="logo">EG</div>
-            <div class="logo-text">geotagger</div>
+            <div class="logo">
+                 <img src="/app/static/img/logo (yellow).png" alt="Logo">
+            </div>
+            <div class="logo-text">The Geo-Tagger</div>
         </div>
              <div class="nav-links">
                 <a href="map.html">Map</a>
@@ -370,27 +385,21 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
                 <h3>Pictures Carousel</h3>
 
                 <div class="carousel-container">
-                    <img src="https://picsum.photos/id/1015/700/420" class="active" alt="">
-                    <img src="https://i.pinimg.com/1200x/14/31/71/1431717c4347724460a7e8fc9674440d.jpg" alt="">
-                    <img src="https://www.ghibli.jp/gallery/totoro025.jpg" alt="">
-                    <img src="https://64.media.tumblr.com/3a8c56d900d560816aa1cffc58d528b0/dc247a8828ce3176-5f/s400x600/33f2b27131b75de26221a377c375f7a5a1cbcb5d.png" alt="">
+                    <img src="\app\static\img\road.jpeg" class="active" alt="">
+                    <img src="\app\static\img\beach 2 bg.jpeg" alt="">
+                    <img src="\app\static\img\beach bg.jpeg" alt="">
+                    <img src="\app\static\img\land bg.jpeg" alt="">
 
                     <button class="arrow prev">‹</button>
                     <button class="arrow next">›</button>
                 </div>
 
-                <div class="indicators">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
 
             
             <div class="description">
                 <h3>Mountain</h3>
                 <p class="small-text">
-                    Literally a mountain, trust me bro.
+                    Your Description here.
                 </p>
                 <p class="location-line">
                     Coordinates: 10.0000, -61.0000

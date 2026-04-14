@@ -45,10 +45,10 @@
         }
 
         .logo {
-            width: 44px;
-            height: 44px;
+            width: 60px;
+            height: 60px;
             border-radius: 30px;
-            background: linear-gradient(135deg, #250404, #b04535);
+            background: linear-gradient(135deg, #99120b, #520c01);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -56,7 +56,12 @@
             font-size: 14px;
             color: #FFF8DC;
             font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .logo:hover {
+         transform: translateY(-2px);
+                    }
 
         .logo-text {
             font-size: 20px;
@@ -64,6 +69,14 @@
             font-family: 'Montserrat', sans-serif;
             color: #2d2a24;
             letter-spacing: -0.5px;
+        }
+
+        .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
         }
 
         .nav-links {
@@ -206,10 +219,13 @@
     <div class="navbar">
 
         <div class="nav-left">
+           <div class="nav-left">
             <div class="logo">
-                 <img src="app/static/img/logo (yellow).png" alt="Logo">
+                 <img src="/app/static/img/logo (yellow).png" alt="Logo">
             </div>
-            <div class="logo-text">geotagger</div>
+            <div class="logo-text">The Geo-Tagger</div>
+        </div>
+
         </div>
         <div class="nav-links">
             <a href="map.html" id="navMapBtn" class="active">Map</a>
@@ -224,11 +240,11 @@
         <div class="map-placeholder">
             <div class="map-icon">MAP</div>
             <h3>Interactive Map</h3>
-            <p>Map functionality will be added here!</p>
-            <small>Click on map to place pins for your pictures allegedly</small>
+            <p>Map functionality will be here!</p>
+            <small>Click on map to place pins for your pictures</small>
         </div>
         <div class="map-hint">
-            Map placeholder 
+            Tag your spot!
         </div>
     </div>
 

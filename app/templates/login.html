@@ -90,20 +90,43 @@
             margin-bottom: 32px;
         }
 
-        .logo-icon {
+        .logo {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #8B1E1E, #b04535);
             border-radius: 30px;
+            background: linear-gradient(135deg, #99120b, #520c01);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
+            font-size: 14px;
             color: #FFF8DC;
             font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            margin: 0 auto;
         }
+
+        .logo:hover {
+         transform: translateY(-2px);
+                    }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
+
+        .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
+        }
+
 
         .logo-section h2 {
             font-family: 'Montserrat', sans-serif;
@@ -266,7 +289,12 @@
         <div class="login-card">
             <div class="card-inner">
                 <div class="logo-section">
-                    <div class="logo-icon">EG</div>
+
+                    <div class="logo">
+                 <img src="/app/static/img/logo (yellow).png" alt="Logo">
+            </div>
+            
+
                     <h2>Welcome Back!</h2>
                     <p>Sign in to see your progress</p>
                 </div>
@@ -308,10 +336,10 @@
 <script>
     
     const backgroundImages = [
-        "/static/img/beach bg.jpeg",
-        "/static/img/beach 2 bg.jpeg",
-        "/static/img/land bg.jpeg",
-        "/static/img/road.jpeg"
+        "/app/static/img/beach bg.jpeg",
+        "/app/static/img/beach 2 bg.jpeg",
+        "/app/static/img/land bg.jpeg",
+        "/app/static/img/road.jpeg"
     ];
 
     let currentSlide = 0;

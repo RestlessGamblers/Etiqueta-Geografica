@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>spanish spansih and more spanish</title>
+    <title>Etiqueta Geográfica</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
@@ -58,11 +58,11 @@
             gap: 28px;
         }
 
-        .logo {
-            width: 44px;
-            height: 44px;
+         .logo {
+            width: 60px;
+            height: 60px;
             border-radius: 30px;
-            background: linear-gradient(135deg, #250404, #b04535);
+            background: linear-gradient(135deg, #99120b, #520c01);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -70,7 +70,12 @@
             font-size: 14px;
             color: #FFF8DC;
             font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .logo:hover {
+         transform: translateY(-2px);
+                    }
 
         .logo-text {
             font-size: 20px;
@@ -79,6 +84,15 @@
             color: #2d2a24;
             letter-spacing: -0.5px;
         }
+
+        .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
+        }
+
 
         .nav-links {
             display: flex;
@@ -602,8 +616,10 @@
     <div class="navbar">
 
         <div class="nav-left">
-            <div class="logo">EG</div>
-            <div class="logo-text">geotagger</div>
+             <div class="logo">
+                 <img src="/app/static/img/logo (yellow).png" alt="Logo">
+            </div>
+            <div class="logo-text">The Geo-Tagger</div>
             </div>
 
             <div class="nav-links">
@@ -621,12 +637,12 @@
             <div class="map-placeholder">
                 <div style="text-align: center;">
                     <div style="font-size: 64px; margin-bottom: 16px;"></div>
-                    <p>Map should show up here </p>
+                    <p>Map will appear here </p>
                     <small>Map </small>
                 </div>
             </div>
             <div class="map-hint">
-                Map goes here trust
+                Interactive Map
             </div>
         </div>
 
@@ -681,7 +697,7 @@
 
                 <div class="form-group">
                     <label>Picture Description</label>
-                    <textarea id="picDescription" rows="2" placeholder="Describe this moment..."></textarea>
+                    <textarea id="picDescription" rows="2" placeholder="Describe the moment"></textarea>
                 </div>
 
                 <div class="location-status">
@@ -706,24 +722,24 @@
         const DEMO_PICTURES = [
             {
                 id: "demo1",
-                imageData: "https://i.pinimg.com/1200x/14/31/71/1431717c4347724460a7e8fc9674440d.jpg",
-                description: "Big mountains",
+                imageData: "\\app\\static\\img\\road.jpeg",
+                description: "Your description here",
                 lat: 46.5,
                 lng: 8.3,
                 timestamp: Date.now()
             },
             {
                 id: "demo2",
-                imageData: "https://www.ghibli.jp/gallery/totoro025.jpg",
-                description: "running out of descriptions ngl",
+                imageData: "\\app\\static\\img\\beach bg.jpeg",
+                description: "Your description here",
                 lat: 40.7,
                 lng: -74.0,
                 timestamp: Date.now() + 1000
             },
             {
                 id: "demo3",
-                imageData: "https://www.ghibli.jp/gallery/totoro025.jpg",
-                description: "whatever this is",
+                imageData: "\\app\\static\\img\\beach 2 bg.jpeg",
+                description: "Your description here",
                 lat: 43.1,
                 lng: 11.8,
                 timestamp: Date.now() + 2000
@@ -751,32 +767,32 @@
     const GALLERY_DEMO_PICTURES = [
         {
             id: "gallery_demo1",
-            imageData: "https://i.pinimg.com/1200x/14/31/71/1431717c4347724460a7e8fc9674440d.jpg",
-            description: "Mountain peak at golden hour - breathtaking alpine view",
+            imageData: "\\app\\static\\img\\road.jpeg",
+            description: "Your description here",
             lat: 46.5,
             lng: 8.3,
             timestamp: Date.now()
         },
         {
             id: "gallery_demo2",
-            imageData: "https://64.media.tumblr.com/bd132b37b8f4de54f85434c72576d8f3/b79506c32160374e-2d/s250x400/e4f47425923292e778ff8f6446cfa003a1578a05.jpg",
-            description: "Waterfall cascading through the forest",
+            imageData: "\\app\\static\\img\\beach bg.jpeg",
+            description: "Your description here",
             lat: 40.7,
             lng: -74.0,
             timestamp: Date.now() + 1000
         },
         {
             id: "gallery_demo3",
-            imageData: "https://i.pinimg.com/736x/6b/d7/6a/6bd76adafab176144af06dfcbe8548b0.jpg",
-            description: "me live footage",
+            imageData: "\\app\\static\\img\\beach 2 bg.jpeg",
+            description: "Your description here",
             lat: 43.1,
             lng: 11.8,
             timestamp: Date.now() + 2000
         },
         {
             id: "gallery_demo4",
-            imageData: "https://i.pinimg.com/736x/26/95/33/2695336b8fa271aeb42aca46af551b49.jpg",
-            description: "Misty valley with winding river",
+            imageData: "\\app\\static\\img\\road.jpeg",
+            description: "Your description here",
             lat: 44.5,
             lng: 10.2,
             timestamp: Date.now() + 3000
