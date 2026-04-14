@@ -40,14 +40,15 @@
             line-height: 1.5;
         }
 
+       
         .navbar {
-            background: #fcf6b1;
+            background: #FFF8DC;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 28px;
             border-radius: 80px;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
 
@@ -66,17 +67,55 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 14px;
             color: #FFF8DC;
             font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
             gap: 12px;
+            justify-content: center;
         }
 
-        button {
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: #4b1108;
+            color: white;
+        }
+
+        .login-btn {
+            background: #474b24;
+            color: #FFF8DC;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 60px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 15px;
@@ -84,34 +123,9 @@
             transition: all 0.2s ease;
         }
 
-        .nav-links button {
-            background: transparent;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 60px;
-            color: #474b24;
-        }
-
-        .nav-links button:hover {
-            background: #f7b32b;
-            transform: translateY(-2px);
-        }
-
-        .nav-links button.active {
-            background: #b04535;
-            color: white;
-        }
-
-        .login-btn, .signout-btn {
-            background: #474b24;
-            color: #fcf6b1;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 60px;
-        }
-
-        .login-btn:hover, .signout-btn:hover {
-            background: #160f0c;
+        .login-btn:hover {
+            background: #232510;
+            transform: scale(0.97);
         }
 
 
@@ -178,7 +192,7 @@
             gap: 28px;
         }
 
-        /* for the gallery*/
+        /* somethings not too right here me*/
         .gallery-section {
             background: white;
             border-radius: 32px;
@@ -586,15 +600,19 @@
 
    
     <div class="navbar">
+
         <div class="nav-left">
             <div class="logo">EG</div>
-            <div class="nav-links">
-                <button id="navMapBtn">Map</button>
-                <button id="navGalleryBtn">Pictures</button>
-                <button id="navHomeBtn" class="active">Home Page</button>
+            <div class="logo-text">geotagger</div>
             </div>
+
+            <div class="nav-links">
+            <a href="map.html" id="navMapBtn">Map</a>
+            <a href="base.html" id="navPicturesBtn">Pictures</a>
+            <a href="pic-upload.html" id="navSubmitBtn" class="active">Submit pictures</a>
         </div>
-        <button id="authBtn" class="login-btn">Sign In</button>
+
+        <a href="login.html" class="login-btn" id="authBtn">Log In</button> </a>
     </div>
 
     <div class="main-grid">
@@ -728,8 +746,6 @@
         function saveData() {
             localStorage.setItem("pinmap_expanded_app", JSON.stringify(pictures));
         }
-
-           let galleryPictures = [];
 
     
     const GALLERY_DEMO_PICTURES = [

@@ -50,79 +50,93 @@ h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
     line-height: 1.5;
 }
 
-/* navigation*/
-.navbar {
-    background: #FFF8DC;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 28px;
-    border-radius: 80px;
-    margin-bottom: 32px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,240,0.6);
-}
+        .navbar {
+            background: #FFF8DC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 80px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
 
-.logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #250404, #b04535);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 12px;
-    color: #FFF8DC;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 0.5px;
-}
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #250404, #b04535);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFF8DC;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-.nav-links {
-    display: flex;
-    gap: 12px;
-}
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
 
-button {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
 
-.nav-links button {
-    background: transparent;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 60px;
-    color: #2e2a24;
-}
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
 
-.nav-links button:hover {
-    background: #fce9c4;
-    transform: translateY(-2px);
-}
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
 
-.login-btn {
-    background: #2d241f;
-    color: #FFF8DC;
-    border: none;
-    padding: 8px 24px;
-    border-radius: 60px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+        .nav-links a.active {
+            background: #4b1108;
+            color: white;
+        }
 
-.login-btn:hover {
-    background: #160f0c;
-    transform: scale(0.97);
-}
+        .login-btn {
+            background: #474b24;
+            color: #FFF8DC;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #232510;
+            transform: scale(0.97);
+        }
+
 
 /* main*/
 .container {
@@ -328,21 +342,14 @@ button {
     <div class="navbar">
         <div class="nav-left">
             <div class="logo">EG</div>
-
-            <div class="nav-links">
-
-                <a href="map.html">
-                <button>Map</button> </a>
-                
-                    <a href="gallery.html">
-                <button>Pictures</button>
-                </a>
-
-                <a href="pic-upload.html">
-                    <button>Submit Pictures</button>
-                </a>
-            </div>
+            <div class="logo-text">geotagger</div>
         </div>
+             <div class="nav-links">
+                <a href="map.html">Map</a>
+                <a href="base.html" class="active">Pictures</a>
+                <a href="pic-upload.html">Submit Pictures</a>
+            </div>
+    
         <a href="login.html">
         <button class="login-btn">Log In</button> </a>
     </div>

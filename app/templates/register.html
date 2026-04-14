@@ -17,63 +17,70 @@
         padding: 24px 32px;
     }
 
-    .navbar {
-        background: #fcf6b1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 28px;
-        border-radius: 80px;
-        margin-bottom: 32px;
-        box-shadow: #474b24;
-    }
+   
+        .navbar {
+            background: #FFF8DC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 80px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
 
-    .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 28px;
-        justify-content: center;
-    }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
 
-    .logo-placeholder {
-        width: 44px;
-        height: 44px;
-        border-radius: 30px;
-        background: linear-gradient(135deg, #250404, #b04535);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 12px;
-        color: #FFF8DC;
-        font-family: 'Montserrat', sans-serif;
-        opacity: 0.9;
-    }
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #250404, #b04535);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFF8DC;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    .nav-links {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-    }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
 
-    .nav-links a {
-        background: transparent;
-        border: none;
-        padding: 8px 20px;
-        border-radius: 60px;
-        color: #1c0101;
-        text-decoration: none;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        font-size: 15px;
-        transition: all 0.2s ease;
-        
-    }
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
 
-    .nav-links a:hover {
-        background: #f7b32b;
-        transform: translateY(-2px);
-    }
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
 
     .login-btn {
         background: #474b24;
@@ -185,7 +192,7 @@
     }
 
     .form-section {
-        background: #fcf6b1;
+        background: #FFF8DC;
         padding: 3rem;
         border-radius:  36px 36px 36px 36px;
     }
@@ -314,12 +321,16 @@
 <div class="navbar">
     <div class="nav-left">
         <div class="logo-placeholder"></div>
+        <div class="logo">EG</div>
+        <div class="logo-text">geotagger</div>
+    </div>
+
         <div class="nav-links">
             <a href="map.html">Map</a>
             <a href="base.html">Home Page</a>
             <a href="pic-upload.html">Submit Pictures</a>
         </div>
-    </div>
+
     <a href="login.html" class="login-btn">Log In</a>
 </div>
 
