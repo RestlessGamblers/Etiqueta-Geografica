@@ -302,96 +302,104 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    html
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
+<script>
+    
+    const backgroundImages = [
+        "/static/img/beach bg.jpeg",
+        "/static/img/beach 2 bg.jpeg",
+        "/static/img/land bg.jpeg",
+        "/static/img/road.jpeg"
+    ];
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function initSlideshow() {
+        const container = document.getElementById('slideshowContainer');
+        if (!container) return;
         
-        const backgroundImages = [
-            "https://www.ghibli.jp/gallery/totoro025.jpg",
-            "https://i.pinimg.com/1200x/ac/01/ea/ac01ea054b5c58baed439d5d0cf58b40.jpg",
-            "https://i.pinimg.com/736x/64/dd/b0/64ddb0a4fcd82e1ec82d6f9f5266501d.jpg",     
-        ];
-
-        let currentSlide = 0;
-        let slideInterval;
-
-        function initSlideshow() {
-            const container = document.getElementById('slideshowContainer');
-            container.innerHTML = '';
-            
-            backgroundImages.forEach((imgUrl, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'slide';
-                if (index === 0) slide.classList.add('active');
-                slide.style.backgroundImage = `url('${imgUrl}')`;
-                container.appendChild(slide);
-            });
-            
-            startSlideshow();
-        }
-
-        function startSlideshow() {
-            if (slideInterval) clearInterval(slideInterval);
-            
-            slideInterval = setInterval(() => {
-                const slides = document.querySelectorAll('.slide');
-                if (slides.length === 0) return;
-                
-                slides[currentSlide].classList.remove('active');
-                
-                currentSlide = (currentSlide + 1) % slides.length;
-                
-                slides[currentSlide].classList.add('active');
-            }, 4000); 
-        }
-
+        container.innerHTML = '';
         
-        function showToast(message, title = 'Notice') {
-            const toastEl = document.getElementById('appToast');
-            const toastTitle = document.getElementById('toastTitle');
-            const toastContent = document.getElementById('toastContent');
-            
-            toastTitle.textContent = title;
-            toastContent.textContent = message;
-            
-            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-            toast.show();
-        }
+        backgroundImages.forEach((imgUrl, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            if (index === 0) slide.classList.add('active');
+            slide.style.backgroundImage = `url('${imgUrl}')`;
+            slide.style.backgroundSize = 'cover';
+            slide.style.backgroundPosition = 'center';
+            slide.style.backgroundRepeat = 'no-repeat';
+            container.appendChild(slide);
+        });
+        
+        startSlideshow();
+    }
 
-        // login section
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+    function startSlideshow() {
+        if (slideInterval) clearInterval(slideInterval);
+        
+        slideInterval = setInterval(() => {
+            const slides = document.querySelectorAll('.slide');
+            if (slides.length === 0) return;
+            
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
+    }
+
+    
+    function showToast(message, title = 'Notice') {
+        const toastEl = document.getElementById('appToast');
+        const toastTitle = document.getElementById('toastTitle');
+        const toastContent = document.getElementById('toastContent');
+        
+        if (!toastEl) return;
+        
+        toastTitle.textContent = title;
+        toastContent.textContent = message;
+        
+        const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+        toast.show();
+    }
+
+   
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
+            const username = document.getElementById('username')?.value;
+            const password = document.getElementById('password')?.value;
             
             if (!username || !password) {
                 showToast('Please enter both username and password', 'Error');
                 return;
             }
             
-            
             showToast('Login successful! Redirecting...', 'Success');
-              
-           
-            setTimeout(() => {
             
+            setTimeout(() => {
                 showToast('Redirecting to dashboard...', 'Info');
             }, 1500);
         });
+    }
 
-        //change the designs for popups
-        
-        const savedUsername = localStorage.getItem('savedUsername');
-        if (savedUsername) {
-            document.getElementById('username').value = savedUsername;
-            document.getElementById('rememberMe').checked = true;
-        }
+    // Load saved username if exists
+    const savedUsername = localStorage.getItem('savedUsername');
+    const usernameField = document.getElementById('username');
+    if (savedUsername && usernameField) {
+        usernameField.value = savedUsername;
+        const rememberMe = document.getElementById('rememberMe');
+        if (rememberMe) rememberMe.checked = true;
+    }
 
     
-
+    document.addEventListener('DOMContentLoaded', function() {
         initSlideshow();
-    </script>
+    });
+</script>
 </body>
 </html>
