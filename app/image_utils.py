@@ -15,7 +15,7 @@ def process_sign_image(content: bytes) -> str:
         img = ImageOps.fit(img, (500, 500), method=Image.Resampling.LANCZOS)
 
         if img.mode in ("RGBA", "LA", "P"):
-            img = img.covert("RGB")
+            img = img.convert("RGB")
         
         #Generate a random file name
         filename = f"{uuid.uuid4().hex}.jpg"
