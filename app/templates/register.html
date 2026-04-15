@@ -1,103 +1,480 @@
-{% extends "base.html" %}
-{% block title %}Register{% endblock %}
-
-{% block external_js %}
-
-{% endblock %}
-
-{% block internal_css %}
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
-        background-color: #f8f9fa;
-    }
-
-    .login-container {
+        background: linear-gradient(145deg, #8B1E1E 0%, #6e1510 100%);
+        font-family: 'Open Sans', sans-serif;
         min-height: 100vh;
+        padding: 24px 32px;
     }
 
-    .login-card {
+   
+        .navbar {
+            background: #FFF8DC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 80px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #99120b, #520c01);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFF8DC;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
+
+    .login-btn {
+        background: #474b24;
+        color: #FFF8DC;
         border: none;
-        border-radius: 1rem;
-        overflow: hidden;
+        padding: 8px 24px;
+        border-radius: 60px;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.2s ease;
     }
 
-    .login-image {
-        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    .login-btn:hover {
+        background: #160f0c;
+        transform: scale(0.97);
+        color: #FFF8DC;
+    }
+
+    .register-container {
+        min-height: calc(100vh - 120px);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+    }
+
+    .register-card {
+        border: none;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 25px 45px -12px rgba(43, 1, 1, 0.664);
+        background: transparent;
+    }
+
+    .register-image {
+        background: linear-gradient(135deg, #3d0808 0%, #a53a2a 50%, #6e1510 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fcf6b1;
         padding: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .register-image::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,248,220,0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .image-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .image-content h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -0.5px;
+    }
+
+    .image-content p {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 24px;
+    }
+
+   .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
+        }
+
+    .feature-list {
+        text-align: left;
+        margin-top: 30px;
+        padding-left: 20px;
+    }
+
+    .feature-list li {
+        margin-bottom: 12px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .feature-list li::before {
+       
+        background: #fbf1c8;
+        color: #8B1E1E;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
     }
 
     .form-section {
+        background: #FFF8DC;
         padding: 3rem;
+        border-radius:  36px 36px 36px 36px;
     }
 
-    .btn-primary {
-        border-radius: 0.5rem;
+    .form-section h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        color: #2e0101;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .form-subtitle {
+        color: #321818;
+        font-size: 14px;
+        margin-bottom: 28px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #f7b32b;
+        text-align: center;
+    }
+
+    .form-label {
+        font-weight: 600;
+        font-size: 13px;
+        color: #321818;
+        margin-bottom: 10px;
     }
 
     .form-control {
-        border-radius: 0.5rem;
+        border-radius: 60px;
+        border: 1.5px solid #f7b32b;
+        padding: 14px 19px;
+        font-family: 'Open Sans', sans-serif;
+        transition: all 0.2s ease;
+        margin-top: 6px;
+        width: 25%;
+    }
+
+    .form-control:focus {
+        border-color: #99120B;
+        box-shadow: 0 0 0 3px rgba(176, 69, 53, 0.1);
+        outline: none;
+    }
+
+    .btn-register {
+        background: #99120B;
+        color: #fcf6b1;
+        border: none;
+        border-radius: 60px;
+        padding: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        transition: all 0.2s ease;
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .btn-register:hover {
+        background: #460202;
+        transform: translateY(-2px);
+    }
+
+    .btn-back {
+        background: #fcf6b1;
+        color: #474b24;
+        border: none;
+        border-radius: 60px;
+        padding: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        transition: all 0.2s ease;
+        width: 100%;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-back:hover {
+        background: #fcf6b1;
+        transform: translateY(-2px);
+        color: #2a2d0f;
+    }
+
+    .alert {
+        border-radius: 60px;
+        border: none;
+        margin-top: 16px;
+        font-size: 13px;
+    }
+
+    .alert-success {
+        background: #fcf6b1;
+        color: #474b24;
+    }
+
+    .alert-danger {
+        background: #fcf6b1;
+        color: #99120B;
+    }
+
+    .alert-warning {
+        background: #fcf6b1;
+        color: #fa7921;
+    }
+
+    hr {
+        border-color: #f7b32b;
+        margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+        body { padding: 16px; }
+        .navbar { flex-wrap: wrap; gap: 12px; border-radius: 48px; }
+        .form-section { padding: 2rem; }
+        .register-image { padding: 2rem; }
+        .register-image h2 { font-size: 24px; }
     }
 </style>
-{% endblock %}
 
-
-{% block content %}
-
-<div class="container login-container d-flex align-items-center justify-content-center">
-    <div class="card shadow-lg login-card col-lg-10">
-        <div class="row g-0">
-            <div class="col-lg-6 d-none d-lg-flex login-image">
-                <div class="text-center">
-                    <h2 class="mt-4 fw-bold">Registration</h2>
-                    <p class="lead">Create an account for the app</p>
+    <div class="navbar">
+    <div class="nav-left">
+                <div class="logo">
+                    <img src="/static/img/logo (yellow).png" alt="Logo">
                 </div>
+                <div class="logo-text">The Geo-Tagger</div>
             </div>
-            <div class="col-lg-6 bg-white">
+
+            <div class="nav-links">
+                <a href="/map">Map</a>
+                <a href="/app">Home Page</a>
+                <a href="/upload">Submit Pictures</a>
+            </div>
+
+        <a href="/login" class="login-btn">Log In</a>
+    </div>
+
+
+            <div class="col-lg-6">
                 <div class="form-section">
-                    <h3 class="fw-bold mb-4">Register</h3>
+                    <h3>Create Account</h3>
+                    <div class="form-subtitle">Join to start uploading </div>
 
-                    <form id="signUpForm" method="POST">
+                    <form id="signUpForm">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control form-control-md" id="username" name="username"
-                                required="required">
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Email</label>
-                            <input type="email" class="form-control form-control-md" id="email" name="email"
-                                required="required">
+                            <label for="username" class="form-label">Username   </label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control form-control-md" id="password" name="password"
-                                required>
+                            <label for="email" class="form-label">Email Address  </label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
                         </div>
 
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                Register
-                            </button>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password  </label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
                         </div>
 
-                        <div class="d-grid mb-3">
-                            <a class="btn btn-secondary btn-lg" href="{{url_for('login_view')}}" role="button">
-                                Back to Login
-                            </a>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirm Password  </label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
                         </div>
-                        {% for message in get_flashed_messages(request) %}
-                        <div class="alert alert-{{ message.type }}" role="alert">{{ message.message }}</div>
-                        {% endfor %}
+                        <br> <br>
+                        <button type="submit" class="btn-register">
+                            Register
+                        </button>
+
+                        <div id="flashMessages"></div>
+                      
                     </form>
 
+                    <hr>
+
+                    <div class="text-center">
+                        <small class="text-muted">
+                            By registering, you agree to your email being used for authentication purposes and images you upload to be shared.
+                        </small>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-{% endblock %}
+
+<script>
+    document.getElementById('signUpForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        
+        const flashContainer = document.getElementById('flashMessages');
+        flashContainer.innerHTML = '';
+        
+        function showFlashMessage(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} mt-3`;
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = message;
+            flashContainer.appendChild(alertDiv);
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 4000);
+        }
+        
+        if (!username || username.length < 3) {
+            showFlashMessage('Username must be at least 3 characters', 'warning');
+            return;
+        }
+        
+        if (!email || !email.includes('@')) {
+            showFlashMessage('Please enter a valid email address', 'warning');
+            return;
+        }
+        
+        if (!password || password.length < 6) {
+            showFlashMessage('Password must be at least 6 characters', 'warning');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showFlashMessage('Passwords do not match', 'warning');
+            return;
+        }
+        
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('password', password);
+
+
+        try {
+            const response = await fetch('/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showFlashMessage('Registration successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = "{{ url_for('login_view') }}";
+                }, 2000);
+            } else {
+                showFlashMessage(data.detail || 'Registration failed', 'danger');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            console.log(error)
+            showFlashMessage('Connection error. Please try again.', 'danger');
+        }
+    });
+    
+    const confirmInput = document.getElementById('confirm_password');
+    if (confirmInput) {
+        confirmInput.addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirm = this.value;
+            let matchIndicator = document.getElementById('matchIndicator');
+            
+            if (!matchIndicator) {
+                const newIndicator = document.createElement('small');
+                newIndicator.id = 'matchIndicator';
+                newIndicator.className = 'text-muted mt-1 d-block';
+                this.parentNode.appendChild(newIndicator);
+                matchIndicator = newIndicator;
+            }
+            
+            if (confirm.length === 0) {
+                matchIndicator.innerHTML = '';
+            } else if (password === confirm) {
+                matchIndicator.innerHTML = ' Passwords match!';
+                matchIndicator.style.color = '#2e7d32';
+            } else {
+                matchIndicator.innerHTML = 'Hey! your passwords do not match';
+                matchIndicator.style.color = '#c62828';
+            }
+        });
+    }
+</script>
+

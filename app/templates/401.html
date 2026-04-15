@@ -1,75 +1,177 @@
-{% extends "base.html" %}
-{% block title %}Session Expired{% endblock %}
-
-
 {% block internal_css %}
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
-        background-color: #f8f9fa;
+        background: linear-gradient(145deg, #8B1E1E 0%, #6e1510 100%);
+        font-family: 'Open Sans', sans-serif;
+        min-height: 100vh;
     }
 
     .page-container {
         min-height: 100vh;
-    }
-
-    .card-custom {
-        border: none;
-        border-radius: 1rem;
-        overflow: hidden;
-    }
-
-    .left-section {
-        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 24px;
+    }
+
+    .error-card {
+        border: none;
+        border-radius: 48px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+        background: transparent;
+        max-width: 1000px;
+        width: 100%;
+    }
+
+    
+    .error-left {
+        background: linear-gradient(135deg, #8B1E1E 0%, #9e2a1e 30%, #a03520 50%, #9e2a1e 70%, #8B1E1E 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF8DC;
+        padding: 3rem;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .error-left::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,248,220,0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .error-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+    }
+
+    .error-left h1 {
+        font-size: 80px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .error-left p {
+        font-size: 18px;
+        opacity: 0.95;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    
+    .error-right {
+        background: white;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 400px;
+    }
+
+    .error-code {
+        font-size: 120px;
+        font-weight: 800;
+        font-family: 'Montserrat', sans-serif;
+        color: #8B1E1E;
+        line-height: 1;
+        margin-bottom: 16px;
+        letter-spacing: -4px;
+    }
+
+    .error-title {
+        font-size: 28px;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+        color: #2d2a24;
+        margin-bottom: 16px;
+    }
+
+    .error-message {
+        font-size: 16px;
+        color: #6a5a4a;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+
+    .home-btn {
+        background: #b04535;
         color: white;
-        padding: 3rem;
+        border: none;
+        border-radius: 60px;
+        padding: 14px 32px;
+        font-weight: 700;
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
     }
 
-    .left-section img {
-        max-width: 100%;
-        height: auto;
+    .home-btn:hover {
+        background: #8B1E1E;
+        transform: translateY(-2px);
+        color: white;
     }
 
-    .right-section {
-        padding: 3rem;
-    }
-
-    .btn-primary {
-        border-radius: 0.5rem;
+    @media (max-width: 768px) {
+        .error-left { padding: 2rem; }
+        .error-right { padding: 2rem; }
+        .error-code { font-size: 80px; }
+        .error-title { font-size: 22px; }
+        .error-left h1 { font-size: 50px; }
+        .error-left p { font-size: 14px; }
     }
 </style>
 {% endblock %}
 
-
 {% block content %}
 
-<div class="container page-container d-flex align-items-center justify-content-center">
-    <div class="card shadow-lg card-custom col-lg-10">
+<div class="page-container">
+    <div class="error-card">
         <div class="row g-0">
 
-            <div class="col-lg-6 d-none d-lg-flex left-section">
-                <div class="text-center">
-                    <h2 class="mt-4 fw-bold">Session Expired</h2>
-                    <p class="lead">For security reasons, please sign in again.</p>
+            
+            <div class="col-lg-6 d-none d-lg-flex error-left">
+                <div class="error-content">
+                    <h1>401</h1>
+                    <p>LOOKS LIKE YOU'RE IN THE WRONG PART OF TOWN</p>
                 </div>
             </div>
 
-            <div class="col-lg-6 bg-white">
-                <div class="right-section d-flex flex-column justify-content-center h-100">
-                    <h1 class="display-5 fw-bold text-danger mb-3">401</h1>
-                    <h3 class="fw-semibold mb-3">Unauthorized</h3>
-                    <p class="text-muted mb-4">
-                        Your session has expired or you do not have permission to access this page.
-                        Please log in again to continue.
-                    </p>
-
-                    <div class="d-grid">
-                        <a href="{{url_for('login_view')}}" class="btn btn-primary btn-lg">
-                            Return to Login
-                        </a>
-                    </div>
+           
+            <div class="col-lg-6 error-right">
+                <div class="error-code">401</div>
+                <h3 class="error-title">Unauthorized</h3>
+                <p class="error-message">
+                    The page you are looking for is not available to you!<br>
+                    Users must have proper authorization to access this content.
+                </p>
+                <div>
+                    <a href="/" class="home-btn">GO TO HOME</a>
                 </div>
             </div>
 

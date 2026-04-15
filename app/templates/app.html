@@ -1,30 +1,368 @@
-{% extends "authenticated-base.html" %}
+<!doctype html>
+<html>
 
-{% block external_js %}
-<script src="{{ url_for('static', path='js/app.js')}}"></script>
-{% endblock %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Etiqueta Geografica{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='img/favicon.ico')}}">
+
+    <!-- Usual bootstrap css, bootstrap js, jquery and material symbols -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+<style>
 
 
-{% block subpage_content %}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <div class="container" id="content">
-        <div class="row">
-            <p>
-                This is table is rendered on the Client. JavaScript code requests the data from <a href="/api/users">/api/users</a> and writes it to this page.
-            </p>
-        </div>
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Id</th><th>Username</th>
-                  </tr>
-                </thead>
-                <tbody id="result">
-                
-                <tbody>
-            </table>
+
+body {
+    background: linear-gradient(145deg, #8B1E1E 0%, #6e1510 100%);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+    padding: 24px 32px;
+}
+
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+h1 { font-size: 32px; letter-spacing: -0.3px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; margin-bottom: 12px; color: #2d2a24; }
+
+/* smaller text*/
+.small-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #4a3e38;
+    line-height: 1.5;
+}
+
+        .navbar {
+            background: #FFF8DC;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            border-radius: 80px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+         .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #99120b, #520c01);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFF8DC;
+            font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo:hover {
+         transform: translateY(-2px);
+                    }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2a24;
+            letter-spacing: -0.5px;
+        }
+
+        .logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            align-self: center;
+            transform: translateY(5px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #1c0101;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background: #f7b32b;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: #4b1108;
+            color: white;
+        }
+
+        .login-btn {
+            background: #474b24;
+            color: #FFF8DC;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #232510;
+            transform: scale(0.97);
+        }
+
+
+/* main*/
+.container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* where the treasure at? (map) */
+.map {
+    background: #ffffffea;
+    border-radius: 36px;
+    box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.2);
+    height: 700px; /* Fixed height is better for Leaflet */
+    width: 100%;   /* Let the grid handle the width */
+    overflow: hidden; /* Keeps the map inside the rounded corners */
+    border: 1px solid rgba(255,245,215,0.6);
+}
+
+.map:hover {
+    transform: translateY(-2px);
+}
+
+/* the right wing */
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: flex-start;
+}
+
+.carousel-card {
+    background: #ffffff;
+    border-radius: 36px;
+    padding: 32px;
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-inner {
+    border-radius: 24px;
+    height: 500px; /* Adjust based on your preference */
+    background: #f8f4eb;
+    margin-bottom: 20px;
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: cover; /* This makes images fill the area without stretching */
+}
+
+.description-text h3 {
+    color: #5a2c22;
+    margin-bottom: 8px;
+}
+
+.location-line {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #7a5a4a;
+    font-weight: bold;
+}
+
+
+@media (max-width: 880px) {
+    body { padding: 16px; }
+    .container { grid-template-columns: 1fr; gap: 24px; }
+    .navbar { flex-wrap: wrap; gap: 14px; border-radius: 48px; }
+    .carousel-container { height: 240px; }
+}
+</style>
+</head>
+
+
+
+    <!-- Custom css and js global for the app-->
+    <link href="{{ url_for('static', path='css/app.css')}}" rel="stylesheet">
+
+    <!-- Custom css for the page -->
+    {% block external_css %}{% endblock %}
+
+    <!-- page specific internal css-->
+    {% block internal_css %}{% endblock %}
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+
+   <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appToast" class="toast">
+            <div class="toast-header">
+                <strong id="toastTitle"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastContent"></div>
         </div>
     </div>
 
-{% endblock %}
+    
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                 <img src="/static/img/logo (yellow).png" alt="Logo">
+            </div>
+            <div class="logo-text">The Geo-Tagger</div>
+        </div>
+             <div class="nav-links">
+                <a href="/map">Map</a>
+                <a href="/app" class="active">Pictures</a>
+                <a href="/upload">Submit Pictures</a>
+            </div>
+    
+        <a href="/logout">
+        <button class="login-btn">Log Out</button> </a>
+    </div>
+
+   
+    <div class="container">
+        <div id="map" class="map"></div>
+
+        <div class="right">
+            <div class="carousel-card">
+                <h3>Pictures Carousel</h3>
+                
+                <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for sign in signs %}
+                            <div {% if loop.first %} id="first-img" {% endif %} 
+                                class="carousel-item {% if loop.first %} active {% endif %}"
+                                data-lat="{{sign.latitude}}"
+                                data-lng="{{sign.longitude}}"
+                                data-desc="{{sign.description}}"
+                                data-user="{{sign.user.username}}">
+                                <img src="/media/sign_pics/{{sign.file_name}}" class="d-block w-100" alt="...">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+
+                <div class="description-text">
+                    <h3 id="display-user">Mountain</h3>
+                    <p id="display-desc" class="small-text">Your Description here.</p>
+                    <p class="location-line">
+                        Coordinates: <span id="display-coords">10.0000, -61.0000</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const images = document.querySelectorAll('.carousel img');
+        let currentIndex = 0;
+        var map = L.map('map').setView([10.45, -61.35], 5);
+    
+        //We're using the link and layer from the project specification doc 
+        var wmsLayer = L.tileLayer.wms('https://geoserver.sundaebytestt.com/geoserver/wms', {
+            layers: 'osm:osm_nohouse'
+        }).addTo(map);
+
+        //Code for printing all of the signs
+
+        //We need to create a marker for explicitly the first img in the carousel
+        const first = document.getElementById('first-img')
+        var marker = L.marker([first.dataset.lat, first.dataset.lng]).addTo(map);
+        document.getElementById('display-user').innerText = first.dataset.user;
+        document.getElementById('display-desc').innerText = first.dataset.desc;
+        document.getElementById('display-coords').innerText = parseFloat(first.dataset.lat).toFixed(4) + ", " + parseFloat(first.dataset.lng).toFixed(4);
+
+        map.panTo(marker.getLatLng())
+
+        //This function listens for the carousel slide to change before it creates a new marker at that location
+        //it also removes the previous marker beforehand and pans to the new one.
+        const myCarousel = document.getElementById('imageCarousel');
+
+        myCarousel.addEventListener('slid.bs.carousel', event => {
+            // 1. Update Map Marker
+            const lat = parseFloat(event.relatedTarget.dataset.lat);
+            const lng = parseFloat(event.relatedTarget.dataset.lng);
+            
+
+            marker.setLatLng([lat, lng]);
+            map.panTo([lat, lng]);
+
+            // 2. Update Text Description
+            document.getElementById('display-user').innerText = event.relatedTarget.dataset.user;
+            document.getElementById('display-desc').innerText = event.relatedTarget.dataset.desc;
+            document.getElementById('display-coords').innerText = lat.toFixed(4) + ", " + lng.toFixed(4);
+        });
+
+    //line up the pic and description
+    //fix little dot animation 
+    //fix carousel buttons
+    // sync up pages
+    </script>
+
+    {% block external_js %}{% endblock %}
+</body>
+
+</html>
